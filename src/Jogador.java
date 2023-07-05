@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Jogador {
     private String nome = "";
@@ -10,18 +11,28 @@ public class Jogador {
         this.nome= nome;
         this.senha= senha;
         this.listaUnidades= new ArrayList<>();
+
+
     }
 
-    public void setCor(String cor, Tabuleiro tabuleiro) {
-        this.cor=cor;
-
+    public boolean setCor(Tabuleiro tabuleiro) {
+        Random gerador = new Random();
+        this.cor="Azul";
+           if(gerador.nextInt(2)==1){
+               this.cor="Azul";
+           }else{
+               this.cor="Vermelho";
+           }
         for (Posicao posicao:tabuleiro.getListaDePosicaoes()) {
             if(posicao.getUnidade()!=null && posicao.getUnidade().getCor().equals(this.cor)){
                 this.listaUnidades.add(posicao.getUnidade());
 
-            };
+            }
 
         }
+
+
+        return false;
     }
 
     private String getCor() {

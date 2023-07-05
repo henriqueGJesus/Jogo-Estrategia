@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class brachiosaurus extends Unidade {
+public class Brachiosaurus extends Unidade {
 
 
-    public brachiosaurus(double ataque, double defesa, double vida, String cor) {
+    public Brachiosaurus(double ataque, double defesa, double vida, String cor) {
         super(35, 55, 500, cor);
     }
 

@@ -25,12 +25,16 @@ public abstract  class Unidade {
      for (int i = 0; i <50 ; i++) {
          if(this.cor=="Azul") {
              if (tabuleiro.getListaDePosicaoes().get(i).equals(cor == "Vermelho")) {
-                 atacar(adversario,tabuleiro);
+                if(atacar(adversario,tabuleiro)){
+                    break;
+                }
              }
          }
          if(this.cor=="Vermelho") {
              if (tabuleiro.getListaDePosicaoes().get(i).equals(cor == "Azul")) {
-                 atacar(adversario,tabuleiro);
+                 if(atacar(adversario,tabuleiro)){
+                     break;
+                 }
              }
          }
 
@@ -82,5 +86,13 @@ public abstract  class Unidade {
 
     public void setDefesa(double defesa) {
         this.defesa = defesa;
+    }
+
+    public double getAtaque() {
+        return ataque;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
     }
 }

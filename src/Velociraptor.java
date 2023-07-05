@@ -10,9 +10,35 @@ public class Velociraptor extends Unidade {
 
     @Override
     public boolean atacar(Unidade adversario, Tabuleiro tabuleiro) {
-        // Acerta dois hits por vez
-    return false;
+        int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this);
+        adversario = tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 5).getUnidade();
+
+
+        if (this.getCor() == "Azul") {
+            if (adversario.getCor().equals("Vermelho")) {
+                if (adversario.getDefesa() == 0) {
+                    adversario.setVida(adversario.getVida() - this.getAtaque()*2);
+                    return true;
+                } else {
+                    adversario.setDefesa(adversario.getDefesa() - this.getAtaque()*2);
+                    return true;
+                }
+            }
+        } else if (this.getCor() == "Vermelho") {
+            if (adversario.getCor().equals("Azul")) {
+                if (adversario.getDefesa() == 0) {
+                    adversario.setVida(adversario.getVida() - this.getAtaque()*2);
+                    return true;
+                } else {
+                    adversario.setDefesa(adversario.getDefesa() - this.getAtaque()*2);
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
+
 
 }
 
