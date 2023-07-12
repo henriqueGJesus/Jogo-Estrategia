@@ -50,16 +50,16 @@ public abstract  class Unidade {
             if(posicaoTabuleiro.get(posicaoNoTabuleiro-5).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Azul")){
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
             }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro+4).getUnidade()==null){
+            if(posicaoTabuleiro.get(posicaoNoTabuleiro+4).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Vermelho")){
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
             }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro-4).getUnidade()==null){
+            if(posicaoTabuleiro.get(posicaoNoTabuleiro-4).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Azul")){
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
             }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro+6).getUnidade()==null){
+            if(posicaoTabuleiro.get(posicaoNoTabuleiro+6).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Vermelho")){
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
             }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro-6).getUnidade()==null){
+            if(posicaoTabuleiro.get(posicaoNoTabuleiro-6).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Azul")){
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
             }
 
