@@ -1,17 +1,17 @@
 public class Trex extends Unidade {
 
 
-    public Trex(double ataque, double defesa, double vida, String cor ) {
-        super(150, 55, 450, cor);
+    public Trex(double ataque, double defesa, double vida, String cor, Posicao posicao ) {
+        super(150, 55, 450, cor,posicao);
     }
 
     @Override
-    public boolean atacar(Unidade adversario, Tabuleiro tabuleiro) {
+    public boolean atacar( Tabuleiro tabuleiro) {
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this);
 
         for (int i = 4; i <=6 ; i++) {
+            Unidade adversario = tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + i).getUnidade();
             if (this.getCor() == "Azul") {
-                adversario = tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + i).getUnidade();
                 if (adversario.equals(getCor() == "Vermelho")) {
                     if (adversario.getDefesa() == 0) {
                         adversario.setVida(adversario.getVida() - this.getAtaque());

@@ -3,16 +3,16 @@ import java.util.ArrayList;
 public class Brachiosaurus extends Unidade {
 
 
-    public Brachiosaurus(double ataque, double defesa, double vida, String cor) {
-        super(35, 55, 500, cor);
+    public Brachiosaurus(double ataque, double defesa, double vida, String cor, Posicao posicao) {
+        super(35, 55, 500, cor, posicao);
     }
 
     @Override
-    public boolean atacar(Unidade adversario,Tabuleiro tabuleiro) {
+    public boolean atacar(Tabuleiro tabuleiro) {
         //Acerta os adversarios até 4 casas de distancia
         int posicaoNoTabuleiro= tabuleiro.getListaDePosicaoes().indexOf(this);
         ArrayList<Posicao> posicaoTabuleiro= tabuleiro.getListaDePosicaoes();
-        adversario= tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+20).getUnidade();
+        Unidade adversario= tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+20).getUnidade();
 
         for (int i = 0; i <50 ; i++) {
 
