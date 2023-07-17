@@ -4,7 +4,7 @@ public class Trex extends Unidade {
     public Trex(double ataque, double defesa, double vida, String cor, Posicao posicao ) {
         super(150, 55, 450, cor,posicao);
     }
-
+    //gsfdgsdgsdg
     @Override
     public boolean atacar( Tabuleiro tabuleiro) {
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this);

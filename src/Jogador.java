@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Jogador {
+    //gsfdgsdgsdg
     private String nome = "";
     private String senha = "";
     private String cor = "";

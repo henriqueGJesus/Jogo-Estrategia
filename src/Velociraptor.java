@@ -6,7 +6,7 @@ public class Velociraptor extends Unidade {
     public Velociraptor(double ataque, double defesa, double vida, String cor, Posicao posicao) {
         super(70, 25, 250, cor,posicao);
     }
-
+//gsfdgsdgsdg
 
     @Override
     public boolean atacar( Tabuleiro tabuleiro) {

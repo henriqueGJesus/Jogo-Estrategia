@@ -37,7 +37,7 @@ public class Main {
         }
 
     }
-
+    //gsfdgsdgsdg
     private static void jogar(Jogador jogadorLogado, Jogador jogadorAdversario) {
         System.out.println(tabuleiro.getListaDePosicaoes());
         System.out.println("Escolha a peça que desja jogar: "+ jogadorLogado.getPecas());

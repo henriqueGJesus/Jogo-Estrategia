@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Tabuleiro {
     private ArrayList<Posicao> listaDePosicoes = new ArrayList<>();
-
+//gsfdgsdgsdg
     public Tabuleiro(){
         for (int i = 0; i < 50; i++) {
            listaDePosicoes.add(new Posicao());
