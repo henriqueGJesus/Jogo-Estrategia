@@ -2,11 +2,11 @@ public class Trex extends Unidade {
 
 
     public Trex(double ataque, double defesa, double vida, String cor, Posicao posicao ) {
-        super(150, 55, 450, cor,posicao);
+        super(ataque, defesa, vida, cor,posicao);
     }
     //gsfdgsdgsdg
     @Override
-    public boolean atacar( Tabuleiro tabuleiro) {
+    public boolean atacar( Tabuleiro tabuleiro, Jogador jogador) {
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this);
 
         for (int i = 4; i <=6 ; i++) {
@@ -18,6 +18,10 @@ public class Trex extends Unidade {
                         return true;
                     } else {
                         adversario.setDefesa(adversario.getDefesa() - this.getAtaque());
+                        if(adversario.getVida()==0){
+                            adversario.setPosicao(null);
+                            jogador.removeUnidade(adversario,tabuleiro);
+                        }
                         return true;
                     }
                 }
@@ -30,6 +34,10 @@ public class Trex extends Unidade {
                         return true;
                     } else {
                         adversario.setDefesa(adversario.getDefesa() - this.getAtaque());
+                        if(adversario.getVida()==0){
+                            adversario.setPosicao(null);
+                            jogador.removeUnidade(adversario,tabuleiro);
+                        }
                         return true;
                     }
                 }

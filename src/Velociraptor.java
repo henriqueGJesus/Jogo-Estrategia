@@ -9,7 +9,7 @@ public class Velociraptor extends Unidade {
 //gsfdgsdgsdg
 
     @Override
-    public boolean atacar( Tabuleiro tabuleiro) {
+    public boolean atacar( Tabuleiro tabuleiro, Jogador jogador) {
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this);
        Unidade adversario = tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 5).getUnidade();
 
@@ -21,6 +21,10 @@ public class Velociraptor extends Unidade {
                     return true;
                 } else {
                     adversario.setDefesa(adversario.getDefesa() - this.getAtaque()*2);
+                    if(adversario.getVida()==0){
+                        adversario.setPosicao(null);
+                        jogador.removeUnidade(adversario,tabuleiro);
+                    }
                     return true;
                 }
             }
@@ -31,6 +35,10 @@ public class Velociraptor extends Unidade {
                     return true;
                 } else {
                     adversario.setDefesa(adversario.getDefesa() - this.getAtaque()*2);
+                    if(adversario.getVida()==0){
+                        adversario.setPosicao(null);
+                        jogador.removeUnidade(adversario,tabuleiro);
+                    }
                     return true;
                 }
             }

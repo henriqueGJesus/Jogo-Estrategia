@@ -17,6 +17,19 @@ public class Jogador {
 
     }
 
+    public static boolean acabaJogo() {
+        if(listaJogadores.get(0).listaUnidades==null || listaJogadores.get(1).listaUnidades==null ){
+            return true;
+        }
+
+        return false;
+    }
+
+    public void removeUnidade(Unidade adversario, Tabuleiro tabuleiro) {
+        this.listaUnidades.remove(adversario);
+        tabuleiro.removerTabuleiro(adversario);
+    }
+
     public String setCor(Tabuleiro tabuleiro) {
         Random gerador = new Random();
 
@@ -34,8 +47,6 @@ public class Jogador {
 
 
             if (posicao.getUnidade() != null && posicao.getUnidade().getCor().equals(this.cor)) {
-                System.out.println("Ta indo");
-                System.out.println(posicao.getUnidade());
                 this.listaUnidades.add(posicao.getUnidade());
 
             }

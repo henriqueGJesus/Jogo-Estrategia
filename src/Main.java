@@ -39,12 +39,58 @@ public class Main {
     }
     //gsfdgsdgsdg
     private static void jogar(Jogador jogadorLogado, Jogador jogadorAdversario) {
-        System.out.println(tabuleiro.getListaDePosicaoes());
-        System.out.println("Escolha a peça que desja jogar: "+ jogadorLogado.getPecas());
-        int escolha= sc.nextInt();
-        Unidade unidade= jogadorLogado.getPecas().get(escolha);
-        System.out.println("Escolha a posição do movimento: "+unidade);
-        unidade.movimentar(tabuleiro);
+
+        if(!Jogador.acabaJogo()) {
+            System.out.println(tabuleiro);
+
+            System.out.println("Escolha a peça que desja jogar: " + jogadorLogado.getPecas());
+            int escolha = sc.nextInt();
+
+            Unidade unidade = jogadorLogado.getPecas().get(escolha);
+            unidade.PossiveisMovimentos(tabuleiro);
+            Posicao posicaoUnidadeEscolhida = unidade.getPosicao();
+            System.out.println("Escolha a posição do movimento: " + unidade.possiveisMovimentos);
+            int escolhaJogada = sc.nextInt();
+
+            Posicao posicaoDaJogada = Unidade.possiveisMovimentos.get(escolhaJogada);
+
+            unidade.movimentar(posicaoDaJogada, posicaoUnidadeEscolhida);
+
+            unidade.atualizaTabuleiro(tabuleiro, posicaoUnidadeEscolhida);
+
+            System.out.println(tabuleiro);
+
+            System.out.println(tabuleiro);
+
+            if (unidade.atacar(tabuleiro,jogadorLogado)) {
+                System.out.println("Voce deu " + unidade.getAtaque() + " De dano no personagem inimigo");
+            }
+
+
+            //Jogada Adversaria.
+            System.out.println("Escolha a peça que desja jogar: " + jogadorAdversario.getPecas());
+            int escolha2 = sc.nextInt();
+
+            Unidade unidade2 = jogadorAdversario.getPecas().get(escolha2);
+            unidade2.PossiveisMovimentos(tabuleiro);
+            Posicao posicaoUnidadeEscolhida2 = unidade2.getPosicao();
+            System.out.println("Escolha a posição do movimento: " + unidade2.possiveisMovimentos);
+            int escolhaJogada2 = sc.nextInt();
+
+            Posicao posicaoDaJogada2 = Unidade.possiveisMovimentos.get(escolhaJogada2);
+
+            unidade2.movimentar(posicaoDaJogada2, posicaoUnidadeEscolhida2);
+
+            unidade2.atualizaTabuleiro(tabuleiro, posicaoUnidadeEscolhida2);
+
+            System.out.println(tabuleiro);
+            if (unidade2.atacar(tabuleiro,jogadorAdversario)) {
+                System.out.println("Voce deu " + unidade2.getAtaque() + " De dano no personagem inimigo");
+            }
+        }
+
+
+
 
     }
 

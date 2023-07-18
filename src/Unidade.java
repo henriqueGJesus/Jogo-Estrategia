@@ -7,7 +7,7 @@ public abstract  class Unidade {
     private Posicao posicao;
     private String cor;
     ArrayList<Unidade> listaUnidades = new ArrayList<>();
-
+   static ArrayList<Posicao> possiveisMovimentos= new ArrayList<>();
     public Unidade(double ataque, double defesa, double vida, String cor, Posicao posicao){
         this.ataque=ataque;
         this.defesa=defesa;
@@ -17,59 +17,16 @@ public abstract  class Unidade {
         listaUnidades.add(this);
     }
 
- public void movimentar(Tabuleiro tabuleiro){
-     ArrayList<Posicao> possiveisMovimentos= new ArrayList<>();
-     int posicaoNoTabuleiro= tabuleiro.getListaDePosicaoes().indexOf(this.posicao);
-     ArrayList<Posicao> posicaoTabuleiro= tabuleiro.getListaDePosicaoes();
-
-     System.out.println(posicaoNoTabuleiro);
-
-     for (int i = 0; i <50 ; i++) {
-
-         if(this.cor=="Azul") {
-             System.out.println("Eita Azul ");
-             if (tabuleiro.getListaDePosicaoes().get(i).equals(cor == "Vermelho")) {
-                 System.out.println("é vermelho ");
-                if(atacar(tabuleiro)){
-                    break;
-                }
-             }
-         }
-         if(this.cor=="Vermelho") {
-             System.out.println("Eita");
-             if (tabuleiro.getListaDePosicaoes().get(i).equals(cor == "Azul")) {
-                 if(atacar(tabuleiro)){
-                     break;
-                 }
-             }
-         }
-
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade()==null &&posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Vermelho") ){
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
-            }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro-5).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Azul")){
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
-            }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro+4).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Vermelho")){
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
-            }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro-4).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Azul")){
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
-            }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro+6).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Vermelho")){
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
-            }
-            if(posicaoTabuleiro.get(posicaoNoTabuleiro-6).getUnidade()==null && posicaoTabuleiro.get(posicaoNoTabuleiro+5).getUnidade().getCor().equals("Azul")){
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(i));
-            }
-
-
-        }
-     //gsfdgsdgsdg
+ public void movimentar(Posicao posicaoDoMovimento, Posicao posicaoDeOrigem){
+     System.out.println("Posicao de origem"+ posicaoDeOrigem);
+     posicaoDeOrigem.setUnidade(null);
+     posicaoDoMovimento.setUnidade(this);
+        setPosicao(posicaoDoMovimento);
 
      }
 
- public abstract boolean atacar(Tabuleiro tabuleiro);
+ public abstract boolean atacar(Tabuleiro tabuleiro, Jogador jogador);
+
 
     public String getCor() {
         return cor;
@@ -109,4 +66,46 @@ public abstract  class Unidade {
 
     }
 
+    public ArrayList<Posicao> PossiveisMovimentos(Tabuleiro tabuleiro){
+
+        int posicaoNoTabuleiro= tabuleiro.getListaDePosicaoes().indexOf(this.posicao);
+        ArrayList<Posicao> posicaoTabuleiro= tabuleiro.getListaDePosicaoes();
+
+        System.out.println(posicaoNoTabuleiro);
+
+
+            if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Azul")) {
+
+                if (posicaoTabuleiro.get(posicaoNoTabuleiro + 5).getUnidade() == null) {
+                    possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+5));
+                }  if (posicaoTabuleiro.get(posicaoNoTabuleiro + 4).getUnidade() == null) {
+                    possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+4));
+                }  if (posicaoTabuleiro.get(posicaoNoTabuleiro + 6).getUnidade() == null) {
+                    possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+6));
+                }
+            }
+
+            if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Vermelho")) {
+
+                if (posicaoTabuleiro.get(posicaoNoTabuleiro - 5).getUnidade() == null) {
+                    possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro-5));
+                } if (posicaoTabuleiro.get(posicaoNoTabuleiro - 4).getUnidade() == null) {
+                    possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro-4));
+                } if (posicaoTabuleiro.get(posicaoNoTabuleiro - 6).getUnidade() == null) {
+                    possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro-6));
+                }
+            }
+
+        return possiveisMovimentos;
+    }
+
+    public void setPosicao(Posicao posicao) {
+        this.posicao = posicao;
+        System.out.println("Posicao: "+posicao);
+
+    }
+    public Tabuleiro atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoDeOrigem){
+
+       return tabuleiro.atualizaTabuleiro(tabuleiro,getPosicao(), posicaoDeOrigem);
+    }
 }
