@@ -7,7 +7,7 @@ public class Jogador {
     private String senha = "";
     private String cor = "";
     private ArrayList<Unidade> listaUnidades;
-    static ArrayList<Jogador> listaJogadores =new ArrayList<>();
+    static ArrayList<Jogador> listaJogadores = new ArrayList<>();
 
     public Jogador(String nome, String senha) {
         this.nome = nome;
@@ -18,7 +18,7 @@ public class Jogador {
     }
 
     public static boolean acabaJogo() {
-        if(listaJogadores.get(0).listaUnidades==null || listaJogadores.get(1).listaUnidades==null ){
+        if (listaJogadores.get(0).listaUnidades == null || listaJogadores.get(1).listaUnidades == null) {
             return true;
         }
 
@@ -34,18 +34,17 @@ public class Jogador {
         Random gerador = new Random();
 
 
-
         for (Jogador jogador : listaJogadores) {
 
             if (gerador.nextInt(2) == 1 & !jogador.cor.equals("Azul")) {
                 this.cor = "Azul";
-            } else {
-                 this.cor = "Vermelho";
+            } else if(!jogador.cor.equals("Vermelho")) {
+                this.cor = "Vermelho";
+            }else {
+                this.cor="Azul";
             }
         }
         for (Posicao posicao : tabuleiro.getListaDePosicaoes()) {
-
-
             if (posicao.getUnidade() != null && posicao.getUnidade().getCor().equals(this.cor)) {
                 this.listaUnidades.add(posicao.getUnidade());
 
@@ -53,11 +52,10 @@ public class Jogador {
         }
 
 
-
         return this.cor;
     }
 
-    private String getCor() {
+    public String getCor() {
         return cor;
     }
 
@@ -67,8 +65,8 @@ public class Jogador {
 
     public boolean verficaLogin(String senha, String nome) {
 
-        for (Jogador jogador: listaJogadores) {
-            if(jogador.senha.equals(senha) & jogador.nome.equals(nome)){
+        for (Jogador jogador : listaJogadores) {
+            if (jogador.senha.equals(senha) & jogador.nome.equals(nome)) {
                 return true;
             }
 
@@ -79,4 +77,5 @@ public class Jogador {
     public String getNome() {
         return nome;
     }
+
 }

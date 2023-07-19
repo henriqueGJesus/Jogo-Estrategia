@@ -2,38 +2,43 @@ import java.util.ArrayList;
 
 public class Tabuleiro {
     private ArrayList<Posicao> listaDePosicoes = new ArrayList<>();
-//gsfdgsdgsdg
-    public Tabuleiro(){
+
+    //gsfdgsdgsdg
+    public Tabuleiro() {
         for (int i = 0; i < 50; i++) {
-           listaDePosicoes.add(new Posicao());
-            if(i==40 || i==44) {
-                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 55, 500, "Vermelho",listaDePosicoes.get(i)));
+            listaDePosicoes.add(new Posicao());
+            if (i == 40 || i == 44) {
+                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 55, 500, "Vermelho", listaDePosicoes.get(i), "BRAC"));
             }
-            if(i==41 || i==43 || i==42){
-                listaDePosicoes.get(i).setUnidade(new Tricerapto(35, 150, 600, "Vermelho", listaDePosicoes.get(i)));
+            if (i == 41 || i == 42 || i == 43) {
+
+                listaDePosicoes.get(i).setUnidade(new Tricerapto(35, 150, 600, "Vermelho", listaDePosicoes.get(i), "TRIC"));
+
             }
-            if(i==45 || i==46 || i==48 || i==49){
-                listaDePosicoes.get(i).setUnidade(new Velociraptor(70, 25, 250, "Vermelho", listaDePosicoes.get(i)));
+            if (i == 45 || i == 46 || i == 48 || i == 49) {
+                listaDePosicoes.get(i).setUnidade(new Velociraptor(70, 25, 250, "Vermelho", listaDePosicoes.get(i), "VELO"));
+
             }
-            if(i==47){
-                listaDePosicoes.get(i).setUnidade(new Trex(150, 55, 450, "Vermelho", listaDePosicoes.get(i)));
+            if (i == 47) {
+                listaDePosicoes.get(i).setUnidade(new Trex(150, 55, 450, "Vermelho", listaDePosicoes.get(i), "TREX"));
             }
-            if(i==5 || i==9) {
-                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 55, 500, "Azul", listaDePosicoes.get(i)));
+            if (i == 5 || i == 9) {
+                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 55, 500, "Azul", listaDePosicoes.get(i), "BRAC"));
             }
-            if(i==6 || i==8|| i==7){
-                listaDePosicoes.get(i).setUnidade(new Tricerapto(35, 150, 600, "Azul", listaDePosicoes.get(i)));
+            if (i == 6 || i == 8 || i == 7) {
+                listaDePosicoes.get(i).setUnidade(new Tricerapto(35, 150, 600, "Azul", listaDePosicoes.get(i), "TRIC"));
             }
-            if(i==0 || i==1 || i==3 || i==4){
-                listaDePosicoes.get(i).setUnidade(new Velociraptor(70, 25, 250, "Azul", listaDePosicoes.get(i)));
+            if (i == 0 || i == 1 || i == 3 || i == 4) {
+                listaDePosicoes.get(i).setUnidade(new Velociraptor(70, 25, 250, "Azul", listaDePosicoes.get(i), "VELO"));
             }
-            if(i==2){
-                listaDePosicoes.get(i).setUnidade(new Trex(150, 55, 450, "Azul", listaDePosicoes.get(i)));
+            if (i == 2) {
+                listaDePosicoes.get(i).setUnidade(new Trex(150, 55, 450, "Azul", listaDePosicoes.get(i), "TREX"));
             }
 
         }
     }
-    public void removerPeca(Posicao posicao){
+
+    public void removerPeca(Posicao posicao) {
 
     }
 
@@ -42,39 +47,53 @@ public class Tabuleiro {
     }
 
 
-    public Tabuleiro atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoAtulizada, Posicao posicaoDeOrigem){
-        Unidade unidade= posicaoAtulizada.getUnidade();
-        System.out.println(unidade);
+    public Tabuleiro atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoAtulizada, Posicao posicaoDeOrigem) {
+        Unidade unidade = posicaoAtulizada.getUnidade();
 
-        int indicePosicaoAtulizada= listaDePosicoes.indexOf(posicaoAtulizada);
-        int indicePosicaoDeOrigem= listaDePosicoes.indexOf(posicaoDeOrigem);
-        System.out.println(indicePosicaoAtulizada);
-        System.out.println(indicePosicaoDeOrigem);
+        int indicePosicaoAtulizada = listaDePosicoes.indexOf(posicaoAtulizada);
+        int indicePosicaoDeOrigem = listaDePosicoes.indexOf(posicaoDeOrigem);
+
 
         listaDePosicoes.get(indicePosicaoAtulizada).setUnidade(unidade);
         listaDePosicoes.get(indicePosicaoDeOrigem).setUnidade(null);
 
 
-       return tabuleiro;
+        return tabuleiro;
     }
+
     @Override
     public String toString() {
-        ArrayList<String>novaLista = new ArrayList<>();
+        ArrayList<String> novaLista = new ArrayList<>();
+
         for (int i = 0; i < 50; i++) {
-            if(i%5==0){
-                novaLista.add("\n");
-            }else {
-                novaLista.add((listaDePosicoes.get(i).getUnidade() + "|"));
+
+            if ((i + 1) % 5 == 0) {
+                if (listaDePosicoes.get(i).getUnidade() != null) {
+                    novaLista.add((listaDePosicoes.get(i).getUnidade().getSimbolo() + "|"));
+                    novaLista.add("\n");
+                } else {
+
+                    novaLista.add("    ");
+                    novaLista.add("\n");
+                }
+
+            } else {
+                if (listaDePosicoes.get(i).getUnidade() != null) {
+                    novaLista.add((listaDePosicoes.get(i).getUnidade().getSimbolo() + "|"));
+                } else {
+
+                    novaLista.add("    ");
+                }
             }
         }
 
 
         System.out.println(novaLista);
-            return "";
+        return "";
 
     }
 
-    public void removerTabuleiro(Unidade unidade){
+    public void removerTabuleiro(Unidade unidade) {
 
         listaDePosicoes.remove(unidade.getPosicao());
     }
