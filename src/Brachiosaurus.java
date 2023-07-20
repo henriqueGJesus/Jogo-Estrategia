@@ -1,10 +1,9 @@
-import java.util.ArrayList;
+
 
 public class Brachiosaurus extends Unidade {
-//gsfdgsdgsdg
 
     public Brachiosaurus(double ataque, double defesa, double vida, String cor, Posicao posicao, String simbolo) {
-        super(35, 55, 500, cor, posicao, simbolo);
+        super(ataque, defesa, vida, cor, posicao, simbolo);
     }
 
     @Override

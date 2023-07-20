@@ -58,9 +58,6 @@ public abstract class Unidade {
         return ataque;
     }
 
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
 
     @Override
     public String toString() {
@@ -69,6 +66,7 @@ public abstract class Unidade {
     }
 
     public ArrayList<Posicao> PossiveisMovimentos(Tabuleiro tabuleiro) {
+
 
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this.posicao);
         ArrayList<Posicao> posicaoTabuleiro = tabuleiro.getListaDePosicaoes();
@@ -119,4 +117,15 @@ public abstract class Unidade {
     public String getSimbolo() {
         return simbolo;
     }
+
+     public ArrayList<String> toStringPossiveisMovimentos(){
+        ArrayList<String> listaDepossiveisMovimentos = new ArrayList<>();
+
+        for (int i = 0; i <possiveisMovimentos.size() ; i++) {
+            listaDepossiveisMovimentos.add(""+possiveisMovimentos.get(i));
+        }
+
+        return listaDepossiveisMovimentos;
+    }
+
 }

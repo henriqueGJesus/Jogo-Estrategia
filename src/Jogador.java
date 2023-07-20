@@ -2,16 +2,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Jogador {
-    //gsfdgsdgsdg
     private String nome = "";
     private String senha = "";
     private String cor = "";
     private ArrayList<Unidade> listaUnidades;
     static ArrayList<Jogador> listaJogadores = new ArrayList<>();
 
-    public Jogador(String nome, String senha) {
+    public Jogador(String nome) {
         this.nome = nome;
-        this.senha = senha;
         this.listaUnidades = new ArrayList<>();
 
 
@@ -32,7 +30,6 @@ public class Jogador {
 
     public String setCor(Tabuleiro tabuleiro) {
         Random gerador = new Random();
-
 
         for (Jogador jogador : listaJogadores) {
 
@@ -63,19 +60,16 @@ public class Jogador {
         return listaUnidades;
     }
 
-    public boolean verficaLogin(String senha, String nome) {
-
-        for (Jogador jogador : listaJogadores) {
-            if (jogador.senha.equals(senha) & jogador.nome.equals(nome)) {
-                return true;
-            }
-
-        }
-        return false;
-    }
-
     public String getNome() {
         return nome;
     }
 
+    public  ArrayList<String> toStringListaunidades() {
+        ArrayList<String> listaSimboloUnidades = new ArrayList<>();
+        for (int i = 0; i < listaUnidades.size(); i++) {
+           listaSimboloUnidades.add(""+i +"- "+ listaUnidades.get(i).getSimbolo()
+                   );
+        }
+       return listaSimboloUnidades;
+    }
 }
