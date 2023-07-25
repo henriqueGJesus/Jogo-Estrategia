@@ -30,7 +30,7 @@ public class Jogador {
 
     public String setCor(Tabuleiro tabuleiro) {
         Random gerador = new Random();
-
+        listaUnidades.clear();
         for (Jogador jogador : listaJogadores) {
 
             if (gerador.nextInt(2) == 1 & !jogador.cor.equals("Azul")) {

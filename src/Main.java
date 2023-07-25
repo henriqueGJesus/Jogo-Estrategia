@@ -29,23 +29,35 @@ public class Main {
 
     private static void comecaJogo(Jogador jogador1, Jogador jogador2) {
         int i = 0;
-
-            if (jogador1.setCor(tabuleiro).equals("Azul") && i % 2 == 0) {
-                i++;
-                System.out.println("O " + jogador1.getNome() + " Joga agora");
-                jogar(jogador1);
-            } else if (jogador2.setCor(tabuleiro).equals("Vermelho") && i % 2 == 1) {
-                i++;
-                System.out.println("O " + jogador2.getNome() + " Joga agora");
-                jogar(jogador2);
-            }
+            do {
+                if(i % 2 == 0 ){
+                if (jogador1.setCor(tabuleiro).equals("Azul")) {
+                    i++;
+                    System.out.println("O " + jogador1.getNome() + " Joga agora");
+                    jogar(jogador1);
+                }else if(jogador2.setCor(tabuleiro).equals("Azul")){
+                    i++;
+                    System.out.println("O " + jogador2.getNome() + " Joga agora");
+                    jogar(jogador2);
+                }
+                } else if (i % 2 == 1) {
+                    if(jogador2.setCor(tabuleiro).equals("Vermelho")) {
+                        i++;
+                        System.out.println("O " + jogador2.getNome() + " Joga agora");
+                        jogar(jogador2);
+                    } else if (jogador1.setCor(tabuleiro).equals("Vermelho")) {
+                        i++;
+                        System.out.println("O " + jogador1.getNome() + " Joga agora");
+                        jogar(jogador1);
+                    }
+                }
+            }while(!Jogador.acabaJogo());
 
 
     }
 
 
     private static void jogar(Jogador jogadorLogado) {
-        do {
         System.out.println(tabuleiro);
         System.out.println("Escolha a peça que deseja jogar: " + jogadorLogado.toStringListaunidades());
         int escolha = sc.nextInt();
@@ -70,7 +82,6 @@ public class Main {
         if (unidade.atacar(tabuleiro,jogadorLogado,posicaoUnidadeEscolhida)) {
             System.out.println("Voce deu " + unidade.getAtaque() + " De dano no personagem inimigo");
         }
-        } while (!Jogador.acabaJogo());
 
 
     }

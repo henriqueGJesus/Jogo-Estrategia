@@ -65,17 +65,15 @@ public abstract class Unidade {
 
     }
 
-    public ArrayList<Posicao> PossiveisMovimentos(Tabuleiro tabuleiro) {
+    public void PossiveisMovimentos(Tabuleiro tabuleiro) {
 
-
+        possiveisMovimentos.removeAll(possiveisMovimentos);
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this.posicao);
-        ArrayList<Posicao> posicaoTabuleiro = tabuleiro.getListaDePosicaoes();
 
-        System.out.println(posicaoNoTabuleiro);
+        ArrayList<Posicao> posicaoTabuleiro = tabuleiro.getListaDePosicaoes();
 
 
         if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Azul")) {
-
             if (posicaoTabuleiro.get(posicaoNoTabuleiro + 5).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 5));
             }
@@ -88,7 +86,6 @@ public abstract class Unidade {
         }
 
         if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Vermelho")) {
-
             if (posicaoTabuleiro.get(posicaoNoTabuleiro - 5).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 5));
             }
@@ -100,7 +97,6 @@ public abstract class Unidade {
             }
         }
 
-        return possiveisMovimentos;
     }
 
     public void setPosicao(Posicao posicao) {
@@ -109,9 +105,9 @@ public abstract class Unidade {
 
     }
 
-    public Tabuleiro atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoDeOrigem) {
+    public void atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoDeOrigem) {
 
-        return tabuleiro.atualizaTabuleiro(tabuleiro, this.getPosicao(), posicaoDeOrigem);
+        tabuleiro.atualizaTabuleiro(tabuleiro, this.getPosicao(), posicaoDeOrigem);
     }
 
     public String getSimbolo() {
@@ -122,8 +118,11 @@ public abstract class Unidade {
         ArrayList<String> listaDepossiveisMovimentos = new ArrayList<>();
 
         for (int i = 0; i <possiveisMovimentos.size() ; i++) {
-            listaDepossiveisMovimentos.add(""+possiveisMovimentos.get(i));
+            int indiceParaEscolha= possiveisMovimentos.indexOf(this.getPosicao());
+            listaDepossiveisMovimentos.add(""+indiceParaEscolha);
         }
+
+
 
         return listaDepossiveisMovimentos;
     }

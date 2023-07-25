@@ -72,7 +72,7 @@ public class Tabuleiro {
                     novaLista.add("\n");
                 } else {
 
-                    novaLista.add("    ");
+                    novaLista.add("  "+i);
                     novaLista.add("\n");
                 }
 
@@ -81,7 +81,7 @@ public class Tabuleiro {
                     novaLista.add((listaDePosicoes.get(i).getUnidade().getSimbolo() + "|"));
                 } else {
 
-                    novaLista.add("    ");
+                    novaLista.add("  "+i);
                 }
             }
         }
@@ -96,4 +96,5 @@ public class Tabuleiro {
 
         listaDePosicoes.remove(unidade.getPosicao());
     }
+
 }
