@@ -20,10 +20,13 @@ public abstract class Unidade {
         listaUnidades.add(this);
     }
 
-    public void movimentar(Posicao posicaoDoMovimento, Posicao posicaoDeOrigem) {
+
+
+    public void movimentar(Posicao posicaoDoMovimento, Posicao posicaoDeOrigem, Tabuleiro tabuleiro) {
         posicaoDeOrigem.setUnidade(null);
         posicaoDoMovimento.setUnidade(this);
         setPosicao(posicaoDoMovimento);
+        atualizaTabuleiro(tabuleiro,posicaoDeOrigem);
 
     }
 
@@ -65,7 +68,7 @@ public abstract class Unidade {
 
     }
 
-    public void PossiveisMovimentos(Tabuleiro tabuleiro) {
+    private void possiveisMovimentos(Tabuleiro tabuleiro) {
 
         possiveisMovimentos.removeAll(possiveisMovimentos);
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this.posicao);
@@ -77,10 +80,12 @@ public abstract class Unidade {
             if (posicaoTabuleiro.get(posicaoNoTabuleiro + 5).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 5));
             }
-            if (posicaoTabuleiro.get(posicaoNoTabuleiro + 4).getUnidade() == null) {
+            if (!verificaExtremidade(posicaoNoTabuleiro) &&
+                    posicaoTabuleiro.get(posicaoNoTabuleiro + 4).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 4));
             }
-            if (posicaoTabuleiro.get(posicaoNoTabuleiro + 6).getUnidade() == null) {
+            if (!verificaExtremidade(posicaoNoTabuleiro+1) &&
+                    posicaoTabuleiro.get(posicaoNoTabuleiro + 6).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 6));
             }
         }
@@ -89,19 +94,33 @@ public abstract class Unidade {
             if (posicaoTabuleiro.get(posicaoNoTabuleiro - 5).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 5));
             }
-            if (posicaoTabuleiro.get(posicaoNoTabuleiro - 4).getUnidade() == null) {
+            if (!verificaExtremidade(posicaoNoTabuleiro+1) &&
+                    posicaoTabuleiro.get(posicaoNoTabuleiro - 4).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 4));
             }
-            if (posicaoTabuleiro.get(posicaoNoTabuleiro - 6).getUnidade() == null) {
+            if ( !verificaExtremidade(posicaoNoTabuleiro) &&
+                    posicaoTabuleiro.get(posicaoNoTabuleiro - 6).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 6));
             }
+        }
+
+        if(!verificaExtremidade(posicaoNoTabuleiro+1) &&
+                posicaoTabuleiro.get(posicaoNoTabuleiro + 1).getUnidade() == null){
+
+            possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+1));
+
+        }
+        if( !verificaExtremidade(posicaoNoTabuleiro) &&
+                posicaoTabuleiro.get(posicaoNoTabuleiro -1).getUnidade() == null){
+
+            possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro-1));
+
         }
 
     }
 
     public void setPosicao(Posicao posicao) {
         this.posicao = posicao;
-        System.out.println("Posicao: " + posicao);
 
     }
 
@@ -114,7 +133,8 @@ public abstract class Unidade {
         return simbolo;
     }
 
-     public ArrayList<String> toStringPossiveisMovimentos(){
+     public ArrayList<String> toStringPossiveisMovimentos(Tabuleiro tabuleiro){
+        this.possiveisMovimentos(tabuleiro);
         ArrayList<String> listaDepossiveisMovimentos = new ArrayList<>();
 
         for (int i = 0; i <possiveisMovimentos.size() ; i++) {
@@ -125,6 +145,10 @@ public abstract class Unidade {
 
 
         return listaDepossiveisMovimentos;
+    }
+
+    private boolean verificaExtremidade( int index) {
+        return (index) % 5 == 0;
     }
 
 }

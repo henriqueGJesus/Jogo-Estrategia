@@ -13,10 +13,10 @@ public class Brachiosaurus extends Unidade {
 
         for (int i = 5; i < 20; i += 5) {
 
-            if (this.getCor() == "Azul") {
+            if (this.getCor().equals("Azul")) {
                 Unidade adversario = tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + i).getUnidade();
                 if (adversario != null) {
-                    if (tabuleiro.getListaDePosicaoes().get(i).equals(getCor() == "Vermelho")) {
+                    if (tabuleiro.getListaDePosicaoes().get(i).equals(getCor().equals("Vermelho"))) {
                         if (adversario.getDefesa() == 0) {
                             adversario.setVida(adversario.getVida() - 35);
                         } else {
@@ -29,8 +29,8 @@ public class Brachiosaurus extends Unidade {
                         return true;
                     }
                 }
-            }else if (this.getCor() == "Vermelho") {
-                if (tabuleiro.getListaDePosicaoes().get(i).equals(getCor() == "Azul")) {
+            }else if (this.getCor().equals("Vermelho")) {
+                if (tabuleiro.getListaDePosicaoes().get(i).equals(getCor().equals("Azul"))) {
 
                     Unidade adversario = tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - i).getUnidade();
                     if (adversario != null) {

@@ -64,7 +64,7 @@ public class Tabuleiro {
     public String toString() {
         ArrayList<String> novaLista = new ArrayList<>();
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < listaDePosicoes.size(); i++) {
 
             if ((i + 1) % 5 == 0) {
                 if (listaDePosicoes.get(i).getUnidade() != null) {
