@@ -2,9 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Jogador {
-    private String nome = "";
-    private String senha = "";
-    private String cor = "";
+    private String nome;
+    private String cor ;
     private ArrayList<Unidade> listaUnidades;
     static ArrayList<Jogador> listaJogadores = new ArrayList<>();
 
@@ -16,19 +15,15 @@ public class Jogador {
     }
 
     public static boolean acabaJogo() {
-        if (listaJogadores.get(0).listaUnidades == null || listaJogadores.get(1).listaUnidades == null) {
-            return true;
-        }
-
-        return false;
+        return listaJogadores.get(0).listaUnidades == null || listaJogadores.get(1).listaUnidades == null;
     }
 
     public void removeUnidade(Unidade adversario, Tabuleiro tabuleiro) {
         this.listaUnidades.remove(adversario);
-        tabuleiro.removerTabuleiro(adversario);
+        tabuleiro.removerTabuleiro(adversario, adversario.getPosicao());
     }
 
-    public String setCor(Tabuleiro tabuleiro) {
+    public void setCor() {
         Random gerador = new Random();
                 if (gerador.nextInt(2) == 1) {
                     listaJogadores.get(0).cor="Azul";
@@ -38,18 +33,23 @@ public class Jogador {
                     listaJogadores.get(0).cor="Vermelho";
                 }
 
-        return this.cor;
+
     }
 
-    public String getCor(Tabuleiro tabuleiro) {
+    public String getCor() {
+        return cor;
+    }
+
+    public ArrayList<Unidade> copularListaUnidades(Tabuleiro tabuleiro) {
         listaUnidades.clear();
         for (Posicao posicao : tabuleiro.getListaDePosicaoes()) {
+            System.out.println("Vai");
             if (posicao.getUnidade() != null && posicao.getUnidade().getCor().equals(this.cor)) {
                 this.listaUnidades.add(posicao.getUnidade());
 
             }
         }
-        return cor;
+        return this.listaUnidades;
     }
 
     public ArrayList<Unidade> getPecas() {

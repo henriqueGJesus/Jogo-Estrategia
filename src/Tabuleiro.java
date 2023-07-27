@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class Tabuleiro {
     private ArrayList<Posicao> listaDePosicoes = new ArrayList<>();
-
+//Mudar a vida dos brachiosaurus
     public Tabuleiro() {
         for (int i = 0; i < 50; i++) {
             listaDePosicoes.add(new Posicao());
             if (i == 40 || i == 44) {
-                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 55, 500, "Vermelho", listaDePosicoes.get(i), "BRAC"));
+                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 0, 10, "Vermelho", listaDePosicoes.get(i), "BRAC"));
             }
             if (i == 41 || i == 42 || i == 43) {
 
@@ -22,7 +22,7 @@ public class Tabuleiro {
                 listaDePosicoes.get(i).setUnidade(new Trex(150, 55, 450, "Vermelho", listaDePosicoes.get(i), "TREX"));
             }
             if (i == 5 || i == 9) {
-                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 55, 500, "Azul", listaDePosicoes.get(i), "BRAC"));
+                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 0, 10, "Azul", listaDePosicoes.get(i), "BRAC"));
             }
             if (i == 6 || i == 8 || i == 7) {
                 listaDePosicoes.get(i).setUnidade(new Tricerapto(35, 150, 600, "Azul", listaDePosicoes.get(i), "TRIC"));
@@ -35,10 +35,6 @@ public class Tabuleiro {
             }
 
         }
-    }
-
-    public void removerPeca(Posicao posicao) {
-
     }
 
     public ArrayList<Posicao> getListaDePosicaoes() {
@@ -61,16 +57,16 @@ public class Tabuleiro {
 
     private void promocao(int indicePosicaoAtulizada, Unidade unidade, Jogador jogador) {
 
-        if(jogador.getCor().equals("Azul"))
-
-            if(indicePosicaoAtulizada>=0){
+        if(jogador.getCor().equals(unidade.getCor())){
+            if(indicePosicaoAtulizada>=0) {
                 System.out.println("Aqui foi");
-                for (int i = 0; i <jogador.getListaUnidades().size() ; i++) {
-                    Unidade unidadeASerBuffada= jogador.getListaUnidades().get(i);
-                   unidadeASerBuffada.setDefesa(unidadeASerBuffada.getDefesa()*2);
+                for (int i = 0; i < jogador.getListaUnidades().size(); i++) {
+                    Unidade unidadeASerBuffada = jogador.getListaUnidades().get(i);
+                    unidadeASerBuffada.setDefesa(unidadeASerBuffada.getDefesa() * 2);
                     System.out.println(unidadeASerBuffada.getDefesa());
 
                 }
+            }
 
 
 
@@ -109,9 +105,9 @@ public class Tabuleiro {
 
     }
 
-    public void removerTabuleiro(Unidade unidade) {
-
-        listaDePosicoes.remove(unidade.getPosicao());
+    public void removerTabuleiro(Unidade unidade, Posicao posicao) {
+        int posicaoRemover = listaDePosicoes.indexOf(posicao);
+        listaDePosicoes.get(posicaoRemover).setUnidade(null);
     }
 
 }

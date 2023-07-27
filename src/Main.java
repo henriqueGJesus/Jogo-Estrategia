@@ -29,25 +29,26 @@ public class Main {
 
     private static void comecaJogo(Jogador jogador1, Jogador jogador2) {
         int i = 0;
-        System.out.println(jogador1.setCor(tabuleiro));
-        System.out.println(jogador2.getCor(tabuleiro));
+        jogador1.setCor();
+        System.out.println(jogador1.copularListaUnidades(tabuleiro));
+        System.out.println(jogador2.copularListaUnidades(tabuleiro));
             do {
                 if(i % 2 == 0 ){
-                if (jogador1.getCor(tabuleiro).equals("Azul")) {
+                if (jogador1.getCor().equals("Azul")) {
                     i++;
                     System.out.println("O " + jogador1.getNome() + " Joga agora");
                     jogar(jogador1);
-                }else if(jogador2.getCor(tabuleiro).equals("Azul")){
+                }else if(jogador2.getCor().equals("Azul")){
                     i++;
                     System.out.println("O " + jogador2.getNome() + " Joga agora");
                     jogar(jogador2);
                 }
                 } else if (i % 2 == 1) {
-                    if(jogador2.getCor(tabuleiro).equals("Vermelho")) {
+                    if(jogador2.getCor().equals("Vermelho")) {
                         i++;
                         System.out.println("O " + jogador2.getNome() + " Joga agora");
                         jogar(jogador2);
-                    } else if (jogador1.getCor(tabuleiro).equals("Vermelho")) {
+                    } else if (jogador1.getCor().equals("Vermelho")) {
                         i++;
                         System.out.println("O " + jogador1.getNome() + " Joga agora");
                         jogar(jogador1);
@@ -75,8 +76,7 @@ public class Main {
         unidade.movimentar(posicaoDaJogada, posicaoUnidadeEscolhida, tabuleiro, jogadorLogado);
 
         System.out.println(tabuleiro);
-        System.out.println(jogadorLogado.getCor(tabuleiro));
-
+        System.out.println(jogadorLogado.getCor());
         if (unidade.atacar(tabuleiro,jogadorLogado,posicaoUnidadeEscolhida)) {
             System.out.println("Voce deu " + unidade.getAtaque() + " De dano no personagem inimigo");
         }
