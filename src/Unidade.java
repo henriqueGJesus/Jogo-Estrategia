@@ -22,11 +22,11 @@ public abstract class Unidade {
 
 
 
-    public void movimentar(Posicao posicaoDoMovimento, Posicao posicaoDeOrigem, Tabuleiro tabuleiro) {
+    public void movimentar(Posicao posicaoDoMovimento, Posicao posicaoDeOrigem, Tabuleiro tabuleiro, Jogador jogador) {
         posicaoDeOrigem.setUnidade(null);
         posicaoDoMovimento.setUnidade(this);
         setPosicao(posicaoDoMovimento);
-        atualizaTabuleiro(tabuleiro,posicaoDeOrigem);
+        atualizaTabuleiro(tabuleiro,posicaoDeOrigem, jogador);
 
     }
 
@@ -124,9 +124,9 @@ public abstract class Unidade {
 
     }
 
-    public void atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoDeOrigem) {
+    public void atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoDeOrigem, Jogador jogador) {
 
-        tabuleiro.atualizaTabuleiro(tabuleiro, this.getPosicao(), posicaoDeOrigem);
+        tabuleiro.atualizaTabuleiro(this.getPosicao(), posicaoDeOrigem, jogador);
     }
 
     public String getSimbolo() {

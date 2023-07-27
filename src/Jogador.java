@@ -68,4 +68,8 @@ public class Jogador {
         }
        return listaSimboloUnidades;
     }
+
+    public ArrayList<Unidade> getListaUnidades() {
+        return listaUnidades;
+    }
 }

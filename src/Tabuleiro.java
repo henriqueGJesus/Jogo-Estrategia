@@ -46,7 +46,7 @@ public class Tabuleiro {
     }
 
 
-    public Tabuleiro atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoAtulizada, Posicao posicaoDeOrigem) {
+    public void atualizaTabuleiro(Posicao posicaoAtulizada, Posicao posicaoDeOrigem, Jogador jogador) {
         Unidade unidade = posicaoAtulizada.getUnidade();
 
         int indicePosicaoAtulizada = listaDePosicoes.indexOf(posicaoAtulizada);
@@ -55,9 +55,26 @@ public class Tabuleiro {
 
         listaDePosicoes.get(indicePosicaoAtulizada).setUnidade(unidade);
         listaDePosicoes.get(indicePosicaoDeOrigem).setUnidade(null);
+        promocao(indicePosicaoAtulizada, unidade, jogador);
+
+    }
+
+    private void promocao(int indicePosicaoAtulizada, Unidade unidade, Jogador jogador) {
+
+        if(jogador.getCor().equals("Azul"))
+
+            if(indicePosicaoAtulizada>=0){
+                System.out.println("Aqui foi");
+                for (int i = 0; i <jogador.getListaUnidades().size() ; i++) {
+                    Unidade unidadeASerBuffada= jogador.getListaUnidades().get(i);
+                   unidadeASerBuffada.setDefesa(unidadeASerBuffada.getDefesa()*2);
+                    System.out.println(unidadeASerBuffada.getDefesa());
+
+                }
 
 
-        return tabuleiro;
+
+        }
     }
 
     @Override

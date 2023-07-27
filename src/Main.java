@@ -72,7 +72,7 @@ public class Main {
 
         Posicao posicaoDaJogada = unidade.possiveisMovimentos.get(escolhaJogada);
 
-        unidade.movimentar(posicaoDaJogada, posicaoUnidadeEscolhida, tabuleiro);
+        unidade.movimentar(posicaoDaJogada, posicaoUnidadeEscolhida, tabuleiro, jogadorLogado);
 
         System.out.println(tabuleiro);
         System.out.println(jogadorLogado.getCor(tabuleiro));
