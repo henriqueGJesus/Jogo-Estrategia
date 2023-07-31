@@ -2,12 +2,11 @@ import java.util.ArrayList;
 
 public class Tabuleiro {
     private ArrayList<Posicao> listaDePosicoes = new ArrayList<>();
-//Mudar a vida dos brachiosaurus
     public Tabuleiro() {
         for (int i = 0; i < 50; i++) {
             listaDePosicoes.add(new Posicao());
             if (i == 40 || i == 44) {
-                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 0, 10, "Vermelho", listaDePosicoes.get(i), "BRAC"));
+                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 40, 750, "Vermelho", listaDePosicoes.get(i), "BRAC"));
             }
             if (i == 41 || i == 42 || i == 43) {
 
@@ -22,7 +21,7 @@ public class Tabuleiro {
                 listaDePosicoes.get(i).setUnidade(new Trex(150, 55, 450, "Vermelho", listaDePosicoes.get(i), "TREX"));
             }
             if (i == 5 || i == 9) {
-                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 0, 10, "Azul", listaDePosicoes.get(i), "BRAC"));
+                listaDePosicoes.get(i).setUnidade(new Brachiosaurus(35, 40, 750, "Azul", listaDePosicoes.get(i), "BRAC"));
             }
             if (i == 6 || i == 8 || i == 7) {
                 listaDePosicoes.get(i).setUnidade(new Tricerapto(35, 150, 600, "Azul", listaDePosicoes.get(i), "TRIC"));
@@ -58,16 +57,12 @@ public class Tabuleiro {
     private void promocao(int indicePosicaoAtulizada, Unidade unidade, Jogador jogador) {
 
         if(jogador.getCor().equals(unidade.getCor())){
-            if(indicePosicaoAtulizada>=0) {
-                System.out.println("Aqui foi");
-                for (int i = 0; i < jogador.getListaUnidades().size(); i++) {
-                    Unidade unidadeASerBuffada = jogador.getListaUnidades().get(i);
-                    unidadeASerBuffada.setDefesa(unidadeASerBuffada.getDefesa() * 2);
-                    System.out.println(unidadeASerBuffada.getDefesa());
-
-                }
+            if(unidade.getCor().equals("Vermelho") && indicePosicaoAtulizada>0 && indicePosicaoAtulizada <=4) {
+               buffUnidades(jogador);
             }
-
+            if(unidade.getCor().equals("Azul") && indicePosicaoAtulizada>44 && indicePosicaoAtulizada <=49 ){
+                buffUnidades(jogador);
+            }
 
 
         }
@@ -85,7 +80,7 @@ public class Tabuleiro {
                     novaLista.add("\n");
                 } else {
 
-                    novaLista.add("  "+i);
+                    novaLista.add(" "+i+"  ");
                     novaLista.add("\n");
                 }
 
@@ -94,7 +89,7 @@ public class Tabuleiro {
                     novaLista.add((listaDePosicoes.get(i).getUnidade().getSimbolo() + "|"));
                 } else {
 
-                    novaLista.add("  "+i);
+                    novaLista.add(" "+i+"  ");
                 }
             }
         }
@@ -108,6 +103,17 @@ public class Tabuleiro {
     public void removerTabuleiro(Unidade unidade, Posicao posicao) {
         int posicaoRemover = listaDePosicoes.indexOf(posicao);
         listaDePosicoes.get(posicaoRemover).setUnidade(null);
+    }
+
+    public void buffUnidades(Jogador jogador){
+
+        for (int i = 0; i < jogador.getListaUnidades().size(); i++) {
+            Unidade unidadeASerBuffada = jogador.getListaUnidades().get(i);
+            unidadeASerBuffada.setDefesa(unidadeASerBuffada.getDefesa() * 2);
+            unidadeASerBuffada.setVida(unidadeASerBuffada.getVida() * 2);
+            unidadeASerBuffada.setAtaque(unidadeASerBuffada.getAtaque() * 2);
+        }
+
     }
 
 }

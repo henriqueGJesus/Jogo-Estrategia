@@ -137,9 +137,9 @@ public abstract class Unidade {
         this.possiveisMovimentos(tabuleiro);
         ArrayList<String> listaDepossiveisMovimentos = new ArrayList<>();
 
-        for (int i = 0; i <possiveisMovimentos.size() ; i++) {
-            int indiceParaEscolha= possiveisMovimentos.indexOf(this.getPosicao());
-            listaDepossiveisMovimentos.add(""+indiceParaEscolha);
+        for (Posicao posicao: possiveisMovimentos) {
+            int posicaoEscolha = tabuleiro.getListaDePosicaoes().indexOf(posicao);
+            listaDepossiveisMovimentos.add(possiveisMovimentos.indexOf(posicao)+"- "+ posicaoEscolha);
         }
 
 
@@ -151,4 +151,7 @@ public abstract class Unidade {
         return (index) % 5 == 0;
     }
 
+    public void setAtaque(double ataque) {
+        this.ataque = ataque;
+    }
 }
