@@ -41,7 +41,7 @@ public class Tabuleiro {
     }
 
 
-    public void atualizaTabuleiro(Posicao posicaoAtulizada, Posicao posicaoDeOrigem, Jogador jogador) {
+    public void atualizar(Posicao posicaoAtulizada, Posicao posicaoDeOrigem, Jogador jogador) {
         Unidade unidade = posicaoAtulizada.getUnidade();
 
         int indicePosicaoAtulizada = listaDePosicoes.indexOf(posicaoAtulizada);
@@ -100,7 +100,7 @@ public class Tabuleiro {
 
     }
 
-    public void removerTabuleiro(Unidade unidade, Posicao posicao) {
+    public void removerPosicao(Unidade unidade, Posicao posicao) {
         int posicaoRemover = listaDePosicoes.indexOf(posicao);
         listaDePosicoes.get(posicaoRemover).setUnidade(null);
     }

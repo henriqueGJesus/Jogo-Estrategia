@@ -10,7 +10,7 @@ public class Jogador {
     public Jogador(String nome) {
         this.nome = nome;
         this.listaUnidades = new ArrayList<>();
-
+        listaJogadores.add(this);
 
     }
 
@@ -20,7 +20,7 @@ public class Jogador {
 
     public void removeUnidade(Unidade adversario, Tabuleiro tabuleiro) {
         this.listaUnidades.remove(adversario);
-        tabuleiro.removerTabuleiro(adversario, adversario.getPosicao());
+        tabuleiro.removerPosicao(adversario, adversario.getPosicao());
     }
 
     public void setCor() {

@@ -5,10 +5,10 @@ public abstract class Unidade {
     private double ataque;
     private double defesa;
     private Posicao posicao;
-    private String cor;
-    private String simbolo;
-    ArrayList<Unidade> listaUnidades = new ArrayList<>();
-     ArrayList<Posicao> possiveisMovimentos = new ArrayList<>();
+    private final String cor;
+    private final String simbolo;
+    final ArrayList<Unidade> listaUnidades = new ArrayList<>();
+    final ArrayList<Posicao> possiveisMovimentos = new ArrayList<>();
 
     public Unidade(double ataque, double defesa, double vida, String cor, Posicao posicao, String simbolo) {
         this.ataque = ataque;
@@ -26,11 +26,45 @@ public abstract class Unidade {
         posicaoDeOrigem.setUnidade(null);
         posicaoDoMovimento.setUnidade(this);
         setPosicao(posicaoDoMovimento);
-        atualizaTabuleiro(tabuleiro,posicaoDeOrigem, jogador);
+        tabuleiro.atualizar(this.getPosicao(), posicaoDeOrigem, jogador);
 
     }
 
-    public abstract boolean atacar(Tabuleiro tabuleiro, Jogador jogador, Posicao posicao);
+    public boolean atacar(Tabuleiro tabuleiro, Jogador jogador, Posicao posicao){
+        ArrayList<Unidade> unidadeAtacar = new ArrayList<>();
+        int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(posicao);
+
+        for (int i = 4; i <= 6; i++) {
+            int j = i;
+
+            if (this.getCor().equals("Vermelho")) {
+                j *= -1;
+            }
+            Unidade adversario = tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + j).getUnidade();
+            if (adversario != null && !this.getCor().equals(adversario.getCor())) {
+                double danoVida = this.getAtaque();
+                unidadeAtacar.add(adversario);
+                if (adversario.getDefesa() > 0) {
+
+                    if (this.getAtaque() > adversario.getDefesa()) {
+                        danoVida = this.getAtaque() - adversario.getDefesa();
+                        adversario.setDefesa(0);
+                    }else {
+                        adversario.setDefesa(adversario.getDefesa() - this.getAtaque());
+                        danoVida = 0;
+                    }
+
+                }
+                adversario.setVida(adversario.getVida() - danoVida);
+                if (adversario.getVida() == 0) {
+                    adversario.setPosicao(null);
+                    jogador.removeUnidade(adversario, tabuleiro);
+                }
+            }
+
+        }
+        return (unidadeAtacar.size()>0);
+    }
 
 
     public String getCor() {
@@ -70,16 +104,22 @@ public abstract class Unidade {
 
     private void possiveisMovimentos(Tabuleiro tabuleiro) {
 
-        possiveisMovimentos.removeAll(possiveisMovimentos);
+        possiveisMovimentos.clear();
         int posicaoNoTabuleiro = tabuleiro.getListaDePosicaoes().indexOf(this.posicao);
 
         ArrayList<Posicao> posicaoTabuleiro = tabuleiro.getListaDePosicaoes();
 
+        for (int i = 4; i <= 6  ; i+=2) {
+            int j=i;
+            if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Vermelho")) {
+                j*=-1;
+                }
+                if (posicaoTabuleiro.get(posicaoNoTabuleiro + j).getUnidade() == null) {
+                    possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + j));
+                }
+        }
 
-        if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Azul")) {
-            if (posicaoTabuleiro.get(posicaoNoTabuleiro + 5).getUnidade() == null) {
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 5));
-            }
+
             if (!verificaExtremidade(posicaoNoTabuleiro) &&
                     posicaoTabuleiro.get(posicaoNoTabuleiro + 4).getUnidade() == null) {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 4));
@@ -89,45 +129,40 @@ public abstract class Unidade {
                 possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro + 6));
             }
         }
+//
+//        if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Vermelho")) {
+//            if (posicaoTabuleiro.get(posicaoNoTabuleiro - 5).getUnidade() == null) {
+//                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 5));
+//            }
+//            if (!verificaExtremidade(posicaoNoTabuleiro+1) &&
+//                    posicaoTabuleiro.get(posicaoNoTabuleiro - 4).getUnidade() == null) {
+//                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 4));
+//            }
+//            if ( !verificaExtremidade(posicaoNoTabuleiro) &&
+//                    posicaoTabuleiro.get(posicaoNoTabuleiro - 6).getUnidade() == null) {
+//                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 6));
+//            }
+//        }
+//
+//        if(!verificaExtremidade(posicaoNoTabuleiro+1) &&
+//                posicaoTabuleiro.get(posicaoNoTabuleiro + 1).getUnidade() == null){
+//
+//            possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+1));
+//
+//        }
+//        if( !verificaExtremidade(posicaoNoTabuleiro) &&
+//                posicaoTabuleiro.get(posicaoNoTabuleiro -1).getUnidade() == null){
+//
+//            possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro-1));
+//
+//        }
 
-        if (posicaoTabuleiro.get(posicaoNoTabuleiro).getUnidade().getCor().equals("Vermelho")) {
-            if (posicaoTabuleiro.get(posicaoNoTabuleiro - 5).getUnidade() == null) {
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 5));
-            }
-            if (!verificaExtremidade(posicaoNoTabuleiro+1) &&
-                    posicaoTabuleiro.get(posicaoNoTabuleiro - 4).getUnidade() == null) {
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 4));
-            }
-            if ( !verificaExtremidade(posicaoNoTabuleiro) &&
-                    posicaoTabuleiro.get(posicaoNoTabuleiro - 6).getUnidade() == null) {
-                possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro - 6));
-            }
-        }
-
-        if(!verificaExtremidade(posicaoNoTabuleiro+1) &&
-                posicaoTabuleiro.get(posicaoNoTabuleiro + 1).getUnidade() == null){
-
-            possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro+1));
-
-        }
-        if( !verificaExtremidade(posicaoNoTabuleiro) &&
-                posicaoTabuleiro.get(posicaoNoTabuleiro -1).getUnidade() == null){
-
-            possiveisMovimentos.add(tabuleiro.getListaDePosicaoes().get(posicaoNoTabuleiro-1));
-
-        }
-
-    }
 
     public void setPosicao(Posicao posicao) {
         this.posicao = posicao;
 
     }
 
-    public void atualizaTabuleiro(Tabuleiro tabuleiro, Posicao posicaoDeOrigem, Jogador jogador) {
-
-        tabuleiro.atualizaTabuleiro(this.getPosicao(), posicaoDeOrigem, jogador);
-    }
 
     public String getSimbolo() {
         return simbolo;
@@ -154,4 +189,6 @@ public abstract class Unidade {
     public void setAtaque(double ataque) {
         this.ataque = ataque;
     }
+
+
 }
